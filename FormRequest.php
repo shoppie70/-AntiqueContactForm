@@ -16,8 +16,8 @@ class FormRequest
     {
         $form_items = self::$fillable;
 
-        foreach ($form_items as $item) {
-            self::$formData[$item] = filter_var(isset($request[$item]) ? $request[$item] : '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        foreach ($form_items as $value ) {
+            self::$formData[$value] = filter_var(isset($request[$value]) ? $request[$value] : '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         }
 
         return self::$formData;
