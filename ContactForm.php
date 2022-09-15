@@ -1,5 +1,9 @@
 <?php
 
+include_once 'config.php';
+include_once 'FormRequest.php';
+include_once 'CreateMailBody.php';
+
 class ContactForm
 {
     protected $request = array();
@@ -29,7 +33,7 @@ class ContactForm
         mb_internal_encoding("UTF-8");
 
         $date = date('Y年m月d日 H時i分s秒');
-        $agent = ($this->request['USER_AGENT']) ?: $_SERVER['HTTP_USER_AGENT'];
+        $agent = $_SERVER['HTTP_USER_AGENT'];
         $uri = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
         $body = CreateMailBody::getBody($this->request, $date, $uri, $agent);
