@@ -7,10 +7,10 @@ if ($_REQUEST['_submit']) {
     $contact_form = new ContactForm($_REQUEST);
     $msg = $contact_form->getErrorMessage();
 
-//     Take action based on the score returned:
-     if ( $contact_form->get_recaptcha_score( $_POST['recaptcha_response'] ) < 0.5) {
-         $msg[] = '※不正なリクエストです';
-     }
+    // RECAPTCHAを設置していれば以下のチェックを行う
+    if ($contact_form->get_recaptcha_score($_POST['recaptcha_response']) < 0.5) {
+        $msg[] = '※不正なリクエストです';
+    }
 
     if (!count($msg)) {
         $contact_form->sendmail();

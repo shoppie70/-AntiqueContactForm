@@ -4,7 +4,6 @@ class ContactForm
 {
     protected $request = array();
     protected $msg = array();
-    private $recaptcha_secret = RECAPTCHA_SECRET_KEY;
 
     private $fillable = array(
         'name' => 'お名前',
@@ -67,7 +66,7 @@ class ContactForm
 
     public function get_recaptcha_score($recaptcha_response)
     {
-        $recaptcha = $this->curl_get_contents(RECAPTCHA_URI . '?secret=' . $this->recaptcha_secret . '&response=' . $recaptcha_response);
+        $recaptcha = $this->curl_get_contents(RECAPTCHA_URI . '?secret=' . RECAPTCHA_SECRET_KEY . '&response=' . $recaptcha_response);
         $recaptcha = json_decode($recaptcha, false);
 
         return $recaptcha->score;
